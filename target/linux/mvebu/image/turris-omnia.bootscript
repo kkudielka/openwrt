@@ -11,7 +11,18 @@ else
 fi
 setenv bootargs earlyprintk console=ttyS0,115200 root=${rootdev} rootfstype=auto rootwait
 
+# Select fdtfile, based on SFP module presence
+i2c dev 0
+i2c mw 0x70 0.0 0xf
+i2c read 0x71 0 1 0x00fffff1
+setexpr.b mod_def0 *0x00fffff1 \& 0x10
+if test ${mod_def0} -eq 0; then
+	fdtfile=@DTB@-sfp.dtb
+else
+	fdtfile=@DTB@.dtb
+fi
+
 # Load and boot
-load ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr_r} @DTB@.dtb
+load ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr_r} ${fdtfile}
 load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} zImage
 bootz ${kernel_addr_r} - ${fdt_addr_r}
