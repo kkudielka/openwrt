@@ -1,0 +1,96 @@
+--- a/arch/arm/boot/dts/armada-385-turris-omnia.dts
++++ b/arch/arm/boot/dts/armada-385-turris-omnia.dts
+@@ -18,6 +18,13 @@
+ 	model = "Turris Omnia";
+ 	compatible = "cznic,turris-omnia", "marvell,armada385", "marvell,armada380";
+ 
++	aliases {
++		led-boot = &led_power;
++		led-failsafe = &led_power;
++		led-running = &led_power;
++		led-upgrade = &led_power;
++	};
++
+ 	chosen {
+ 		stdout-path = &uart0;
+ 	};
+@@ -135,7 +142,78 @@
+ 			reg = <0>;
+ 
+ 			/* STM32F0 command interface at address 0x2a */
+-			/* leds device (in STM32F0) at address 0x2b */
++
++			leds@2b {
++				compatible = "turris-leds,omnia";
++				reg = <0x2b>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				led0 {
++					label = "omnia-led:user2";
++					reg = <0x0>;
++				};
++
++				led1 {
++					label = "omnia-led:user1";
++					reg = <0x1>;
++				};
++
++				led2 {
++					label = "omnia-led:pci3";
++					reg = <0x2>;
++				};
++
++				led3 {
++					label = "omnia-led:pci2";
++					reg = <0x3>;
++				};
++
++				led4 {
++					label = "omnia-led:pci1";
++					reg = <0x4>;
++				};
++
++				led5 {
++					label = "omnia-led:wan";
++					reg = <0x5>;
++				};
++
++				led6 {
++					label = "omnia-led:lan4";
++					reg = <0x6>;
++				};
++
++				led7 {
++					label = "omnia-led:lan3";
++					reg = <0x7>;
++				};
++
++				led8 {
++					label = "omnia-led:lan2";
++					reg = <0x8>;
++				};
++
++				led9 {
++					label = "omnia-led:lan1";
++					reg = <0x9>;
++				};
++
++				led10 {
++					label = "omnia-led:lan0";
++					reg = <0xa>;
++				};
++
++				led_power: led11 {
++					label = "omnia-led:power";
++					reg = <0xb>;
++				};
++
++				led12 {
++					label = "omnia-led:all";
++					reg = <0xc>;
++				};
++			};
+ 
+ 			eeprom@54 {
+ 				compatible = "atmel,24c64";
