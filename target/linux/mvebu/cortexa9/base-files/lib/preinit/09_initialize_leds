@@ -1,0 +1,15 @@
+#!/bin/sh
+
+do_initialize_leds() {
+	case $(board_name) in
+		cznic,turris-omnia)
+			insmod i2c-mux
+			insmod i2c-mux-pca954x
+			insmod leds-omnia
+			led_set_attr omnia-led:all autonomous 0
+			;;
+	esac
+}
+
+boot_hook_add preinit_main do_initialize_leds
+
