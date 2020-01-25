@@ -30,6 +30,7 @@ define Device/cznic_turris-omnia
   KERNEL := kernel-bin
   KERNEL_INITRAMFS := kernel-bin
   DEVICE_PACKAGES :=  \
+    kmod-leds-omnia \
     mkf2fs e2fsprogs kmod-fs-vfat kmod-nls-cp437 kmod-nls-iso8859-1 \
     wpad-basic kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct \
     partx-utils kmod-i2c-mux-pca954x
