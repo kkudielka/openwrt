@@ -1,0 +1,30 @@
+#include "armada-385-turris-omnia.dts"
+
+/ {
+	sfp: sfp {
+		compatible = "sff,sfp";
+		i2c-bus = <&i2csfp>;
+		tx-fault-gpios = <&pcawan 0 GPIO_ACTIVE_HIGH>;
+		tx-disable-gpios = <&pcawan 1 GPIO_ACTIVE_HIGH>;
+		rate-select0-gpios = <&pcawan 2 GPIO_ACTIVE_HIGH>;
+		los-gpios = <&pcawan 3 GPIO_ACTIVE_HIGH>;
+		mod-def0-gpios = <&pcawan 4 GPIO_ACTIVE_LOW>;
+	};
+};
+
+&i2c0 {
+	i2cmux@70 {
+		i2csfp: i2c@4 {
+		};
+	};
+};
+
+&phy1 {
+	status = "disabled";
+};
+
+&eth2 {
+	/delete-property/ phy;
+	managed = "in-band-status";
+	sfp = <&sfp>;
+};
