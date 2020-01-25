@@ -38,6 +38,7 @@ define Device/cznic_turris-omnia
   IMAGE/omnia-medkit-$$(IMAGE_PREFIX)-initramfs.tar.gz := omnia-medkit-initramfs | gzip
   IMAGE_NAME = $$(2)
   SOC := armada-385
+  DEVICE_DTS += armada-385-turris-omnia-sfp
   SUPPORTED_DEVICES += armada-385-turris-omnia
   BOOT_SCRIPT := turris-omnia
 endef
