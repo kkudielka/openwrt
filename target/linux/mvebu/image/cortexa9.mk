@@ -35,6 +35,7 @@ define Device/cznic_turris-omnia
   KERNEL := kernel-bin
   KERNEL_INITRAMFS := kernel-bin
   DEVICE_PACKAGES :=  \
+    kmod-leds-omnia \
     mkf2fs e2fsprogs kmod-fs-vfat kmod-nls-cp437 kmod-nls-iso8859-1 \
     wpad-basic-wolfssl kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct \
     partx-utils kmod-i2c-mux-pca954x
@@ -43,6 +44,7 @@ define Device/cznic_turris-omnia
   IMAGE/omnia-medkit-$$(IMAGE_PREFIX)-initramfs.tar.gz := omnia-medkit-initramfs | gzip
   IMAGE_NAME = $$(2)
   SOC := armada-385
+  DEVICE_DTS += armada-385-turris-omnia-sfp
   SUPPORTED_DEVICES += armada-385-turris-omnia
   BOOT_SCRIPT := turris-omnia
 endef
