@@ -1,0 +1,46 @@
+From 983b95e9ab76766a5a13ed64b5b0fe716b80e939 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+Date: Sun, 15 Nov 2020 14:59:23 +0100
+Subject: ARM: dts: turris-omnia: remove unneeded status = "okay" properties
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Only nodes which have status = "disabled" defined from included files
+need status = "okay".
+
+The ethernet-phy node and the i2cmux node do not need it, since they are
+wholly defined here.
+
+Signed-off-by: Marek Behún <kabel@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: Uwe Kleine-König <uwe@kleine-koenig.org>
+Cc: Jason Cooper <jason@lakedaemon.net>
+Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
+Cc: Andreas Färber <afaerber@suse.de>
+Cc: Andrew Lunn <andrew@lunn.ch>
+Cc: Rob Herring <robh+dt@kernel.org>
+Cc: devicetree@vger.kernel.org
+Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
+---
+ arch/arm/boot/dts/armada-385-turris-omnia.dts | 2 --
+ 1 file changed, 2 deletions(-)
+
+--- a/arch/arm/boot/dts/armada-385-turris-omnia.dts
++++ b/arch/arm/boot/dts/armada-385-turris-omnia.dts
+@@ -174,7 +174,6 @@
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 		reg = <0x70>;
+-		status = "okay";
+ 
+ 		i2c@0 {
+ 			#address-cells = <1>;
+@@ -388,7 +387,6 @@
+ 	status = "okay";
+ 
+ 	phy1: ethernet-phy@1 {
+-		status = "okay";
+ 		compatible = "ethernet-phy-ieee802.3-c22";
+ 		reg = <1>;
+ 
