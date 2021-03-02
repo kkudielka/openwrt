@@ -27,6 +27,9 @@ if test ${mod_def0} -eq 0; then
 	fdt set /soc/internal-regs/ethernet@34000 managed in-band-status
 fi
 
+# Enable LED controller
+fdt set /soc/internal-regs/i2c@11000/i2cmux@70/i2c@0/led-controller@2b status okay
+
 # Load kernel and boot
 load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} zImage
 bootz ${kernel_addr_r} - ${fdt_addr_r}
