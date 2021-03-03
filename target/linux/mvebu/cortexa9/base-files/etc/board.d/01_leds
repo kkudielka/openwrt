@@ -11,6 +11,20 @@ board=$(board_name)
 boardname="${board##*,}"
 
 case "$board" in
+cznic,turris-omnia)
+	ucidef_set_led_default "power" "POWER" "rgb:power" "1"
+	ucidef_set_led_netdev "lan0" "LAN 0" "rgb:lan-0" "lan0" "link"
+	ucidef_set_led_netdev "lan1" "LAN 1" "rgb:lan-1" "lan1" "link"
+	ucidef_set_led_netdev "lan2" "LAN 2" "rgb:lan-2" "lan2" "link"
+	ucidef_set_led_netdev "lan3" "LAN 3" "rgb:lan-3" "lan3" "link"
+	ucidef_set_led_netdev "lan4" "LAN 4" "rgb:lan-4" "lan4" "link"
+	ucidef_set_led_netdev "wan" "WAN" "rgb:wan" "eth2" "link"
+	ucidef_set_led_default "pci1" "PCI 1" "rgb:wlan-1" "0"
+	ucidef_set_led_default "pci2" "PCI 2" "rgb:wlan-2" "0"
+	ucidef_set_led_default "pci3" "PCI 3" "rgb:wlan-3" "0"
+	ucidef_set_led_default "user1" "A" "rgb:indicator-1" "0"
+	ucidef_set_led_default "user2" "B" "rgb:indicator-2" "0"
+	;;
 kobol,helios4)
 	ucidef_set_led_usbport "USB" "USB" "helios4:green:usb" "usb1-port1" "usb2-port1" "usb3-port1" "usb4-port1" "usb5-port1"
 	;;
