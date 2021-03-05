@@ -14,6 +14,7 @@ load_led() {
 	local delayon
 	local delayoff
 	local interval
+	local color
 
 	config_get sysfs $1 sysfs
 	config_get name $1 name "$sysfs"
@@ -30,6 +31,7 @@ load_led() {
 	config_get message $1 message ""
 	config_get gpio $1 gpio "0"
 	config_get inverted $1 inverted "0"
+	config_get color $1 color ""
 
 	# execute application led trigger
 	[ -f "/usr/libexec/led-trigger/${trigger}" ] && {
@@ -60,6 +62,16 @@ load_led() {
 
 		echo $trigger > /sys/class/leds/${sysfs}/trigger 2> /dev/null
 		ret="$?"
+
+		if [ -e /sys/class/leds/${sysfs}/multi_index ]; then
+			if [ -z "$color" ]; then
+				max_brightness=$(cat /sys/class/leds/${sysfs}/max_brightness)
+				for component in $(cat /sys/class/leds/${sysfs}/multi_index); do
+					color="${color} ${max_brightness}"
+				done
+			fi
+			echo "$color" >/sys/class/leds/${sysfs}/multi_intensity
+		fi
 
 		[ $default = 1 ] &&
 			cat /sys/class/leds/${sysfs}/max_brightness > /sys/class/leds/${sysfs}/brightness
